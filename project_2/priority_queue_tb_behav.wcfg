@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="priority_queue_tb_time_synth.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="priority_queue_tb" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="693.750 ns"></ZoomStartTime>
+      <ZoomEndTime time="751.351 ns"></ZoomEndTime>
+      <Cursor1Time time="870.000 ns"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="296"></NameColumnWidth>
+      <ValueColumnWidth column_width="90"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="11" />
+   <wvobject fp_name="/priority_queue_tb/clk" type="logic">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/priority_queue_tb/reset" type="logic">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/priority_queue_tb/enqueue" type="logic">
+      <obj_property name="ElementShortName">enqueue</obj_property>
+      <obj_property name="ObjectShortName">enqueue</obj_property>
+   </wvobject>
+   <wvobject fp_name="/priority_queue_tb/dequeue" type="logic">
+      <obj_property name="ElementShortName">dequeue</obj_property>
+      <obj_property name="ObjectShortName">dequeue</obj_property>
+   </wvobject>
+   <wvobject fp_name="/priority_queue_tb/in_data" type="array">
+      <obj_property name="ElementShortName">in_data[31:0]</obj_property>
+      <obj_property name="ObjectShortName">in_data[31:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/priority_queue_tb/out_data" type="array">
+      <obj_property name="ElementShortName">out_data[31:0]</obj_property>
+      <obj_property name="ObjectShortName">out_data[31:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/priority_queue_tb/UUT/\gen_blocks[0].queue_block_inst /to_queue_prev" type="array">
+      <obj_property name="ElementShortName">to_queue_prev[31:0]</obj_property>
+      <obj_property name="ObjectShortName">to_queue_prev[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/priority_queue_tb/UUT/\gen_blocks[1].queue_block_inst /\to_queue_prev_signals[1] " type="array">
+      <obj_property name="ElementShortName">\to_queue_prev_signals[1] [31:0]</obj_property>
+      <obj_property name="ObjectShortName">\to_queue_prev_signals[1] [31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/priority_queue_tb/UUT/\gen_blocks[2].queue_block_inst /\to_queue_prev_signals[2] " type="array">
+      <obj_property name="ElementShortName">\to_queue_prev_signals[2] [31:0]</obj_property>
+      <obj_property name="ObjectShortName">\to_queue_prev_signals[2] [31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/priority_queue_tb/UUT/\gen_blocks[3].queue_block_inst /\to_queue_prev_signals[3] " type="array">
+      <obj_property name="ElementShortName">\to_queue_prev_signals[3] [31:0]</obj_property>
+      <obj_property name="ObjectShortName">\to_queue_prev_signals[3] [31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/priority_queue_tb/UUT/\gen_blocks[4].queue_block_inst /\to_queue_prev_signals[4] " type="array">
+      <obj_property name="ElementShortName">\to_queue_prev_signals[4] [31:0]</obj_property>
+      <obj_property name="ObjectShortName">\to_queue_prev_signals[4] [31:0]</obj_property>
+   </wvobject>
+</wave_config>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenRun Id="impl_1" LaunchPart="xc7z020clg484-1" LaunchTime="1700560007">
+  <File Type="ROUTE-PWR" Name="queue_block_power_routed.rpt"/>
+  <File Type="PA-TCL" Name="queue_block.tcl"/>
+  <File Type="ROUTE-PWR-SUM" Name="queue_block_power_summary_routed.pb"/>
+  <File Type="REPORTS-TCL" Name="queue_block_reports.tcl"/>
+  <File Type="OPT-RQA-PB" Name="queue_block_rqa_opted.pb"/>
+  <File Type="BITSTR-MMI" Name="queue_block.mmi"/>
+  <File Type="OPT-METHODOLOGY-DRC" Name="queue_block_methodology_drc_opted.rpt"/>
+  <File Type="INIT-TIMING" Name="queue_block_timing_summary_init.rpt"/>
+  <File Type="OPT-TIMING" Name="queue_block_timing_summary_opted.rpt"/>
+  <File Type="OPT-DCP" Name="queue_block_opt.dcp"/>
+  <File Type="OPT-DRC" Name="queue_block_drc_opted.rpt"/>
+  <File Type="OPT-HWDEF" Name="queue_block.hwdef"/>
+  <File Type="PWROPT-DCP" Name="queue_block_pwropt.dcp"/>
+  <File Type="PWROPT-DRC" Name="queue_block_drc_pwropted.rpt"/>
+  <File Type="PWROPT-TIMING" Name="queue_block_timing_summary_pwropted.rpt"/>
+  <File Type="PLACE-DCP" Name="queue_block_placed.dcp"/>
+  <File Type="PLACE-IO" Name="queue_block_io_placed.rpt"/>
+  <File Type="PLACE-CLK" Name="queue_block_clock_utilization_placed.rpt"/>
+  <File Type="PLACE-UTIL" Name="queue_block_utilization_placed.rpt"/>
+  <File Type="PLACE-UTIL-PB" Name="queue_block_utilization_placed.pb"/>
+  <File Type="PLACE-CTRL" Name="queue_block_control_sets_placed.rpt"/>
+  <File Type="PLACE-SIMILARITY" Name="queue_block_incremental_reuse_placed.rpt"/>
+  <File Type="PLACE-PRE-SIMILARITY" Name="queue_block_incremental_reuse_pre_placed.rpt"/>
+  <File Type="BG-BIN" Name="queue_block.bin"/>
+  <File Type="PLACE-TIMING" Name="queue_block_timing_summary_placed.rpt"/>
+  <File Type="ROUTE-PWR-RPX" Name="queue_block_power_routed.rpx"/>
+  <File Type="PLACE-RQA-PB" Name="queue_block_rqa_placed.pb"/>
+  <File Type="POSTPLACE-PWROPT-DCP" Name="queue_block_postplace_pwropt.dcp"/>
+  <File Type="BITSTR-MSK" Name="queue_block.msk"/>
+  <File Type="POSTPLACE-PWROPT-TIMING" Name="queue_block_timing_summary_postplace_pwropted.rpt"/>
+  <File Type="PHYSOPT-DCP" Name="queue_block_physopt.dcp"/>
+  <File Type="PHYSOPT-DRC" Name="queue_block_drc_physopted.rpt"/>
+  <File Type="BITSTR-RBT" Name="queue_block.rbt"/>
+  <File Type="PHYSOPT-TIMING" Name="queue_block_timing_summary_physopted.rpt"/>
+  <File Type="ROUTE-ERROR-DCP" Name="queue_block_routed_error.dcp"/>
+  <File Type="ROUTE-DCP" Name="queue_block_routed.dcp"/>
+  <File Type="ROUTE-BLACKBOX-DCP" Name="queue_block_routed_bb.dcp"/>
+  <File Type="ROUTE-DRC" Name="queue_block_drc_routed.rpt"/>
+  <File Type="ROUTE-DRC-PB" Name="queue_block_drc_routed.pb"/>
+  <File Type="ROUTE-DRC-RPX" Name="queue_block_drc_routed.rpx"/>
+  <File Type="ROUTE-METHODOLOGY-DRC" Name="queue_block_methodology_drc_routed.rpt"/>
+  <File Type="ROUTE-METHODOLOGY-DRC-RPX" Name="queue_block_methodology_drc_routed.rpx"/>
+  <File Type="ROUTE-METHODOLOGY-DRC-PB" Name="queue_block_methodology_drc_routed.pb"/>
+  <File Type="ROUTE-RQS-PB" Name="queue_block_rqs_routed.pb"/>
+  <File Type="ROUTE-STATUS" Name="queue_block_route_status.rpt"/>
+  <File Type="ROUTE-STATUS-PB" Name="queue_block_route_status.pb"/>
+  <File Type="ROUTE-TIMINGSUMMARY" Name="queue_block_timing_summary_routed.rpt"/>
+  <File Type="ROUTE-TIMING-PB" Name="queue_block_timing_summary_routed.pb"/>
+  <File Type="ROUTE-TIMING-RPX" Name="queue_block_timing_summary_routed.rpx"/>
+  <File Type="ROUTE-SIMILARITY" Name="queue_block_incremental_reuse_routed.rpt"/>
+  <File Type="ROUTE-CLK" Name="queue_block_clock_utilization_routed.rpt"/>
+  <File Type="ROUTE-BUS-SKEW" Name="queue_block_bus_skew_routed.rpt"/>
+  <File Type="ROUTE-BUS-SKEW-PB" Name="queue_block_bus_skew_routed.pb"/>
+  <File Type="ROUTE-BUS-SKEW-RPX" Name="queue_block_bus_skew_routed.rpx"/>
+  <File Type="POSTROUTE-PHYSOPT-DCP" Name="queue_block_postroute_physopt.dcp"/>
+  <File Type="POSTROUTE-PHYSOPT-BLACKBOX-DCP" Name="queue_block_postroute_physopt_bb.dcp"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING" Name="priority_queue_timing_summary_postroute_physopted.rpt"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING-PB" Name="priority_queue_timing_summary_postroute_physopted.pb"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING-RPX" Name="priority_queue_timing_summary_postroute_physopted.rpx"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW" Name="priority_queue_bus_skew_postroute_physopted.rpt"/>
+  <File Type="BG-BIT" Name="queue_block.bit"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-PB" Name="priority_queue_bus_skew_postroute_physopted.pb"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-RPX" Name="priority_queue_bus_skew_postroute_physopted.rpx"/>
+  <File Type="BITSTR-NKY" Name="queue_block.nky"/>
+  <File Type="BITSTR-BMM" Name="queue_block_bd.bmm"/>
+  <File Type="PDI-FILE" Name="queue_block.pdi"/>
+  <File Type="BOOT-PDI-FILE" Name="queue_block_soc.pdi"/>
+  <File Type="PL-PDI-FILE" Name="queue_block_pld.pdi"/>
+  <File Type="RCFI_FILE" Name="queue_block.rcfi"/>
+  <File Type="CFI_FILE" Name="queue_block.cfi"/>
+  <File Type="RNPI_FILE" Name="queue_block.rnpi"/>
+  <File Type="NPI_FILE" Name="queue_block.npi"/>
+  <File Type="RBD_FILE" Name="queue_block.rbd"/>
+  <File Type="BITSTR-LTX" Name="debug_nets.ltx"/>
+  <File Type="BITSTR-LTX" Name="queue_block.ltx"/>
+  <File Type="BITSTR-SYSDEF" Name="queue_block.sysdef"/>
+  <File Type="BG-BGN" Name="queue_block.bgn"/>
+  <File Type="BG-DRC" Name="queue_block.drc"/>
+  <File Type="RDI-RDI" Name="queue_block.vdi"/>
+  <File Type="WBT-USG" Name="usage_statistics_webtalk.html"/>
+  <File Type="ROUTE-RQS" Name="queue_block_routed.rqs"/>
+  <File Type="POSTROUTE-PHYSOPT-RQS" Name="queue_block_postroute_physopted.rqs"/>
+  <File Type="ROUTE-RQS-RPT" Name="route_report_qor_suggestions_0.rpt"/>
+  <File Type="POSTROUTE-PHYSOPT-RQS-RPT" Name="postroute_physopt_report_qor_suggestions_0.rpt"/>
+  <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
+    <Filter Type="Srcs"/>
+    <File Path="$PSRCDIR/sources_1/new/Queue_block.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/prioqueue.vhd">
+      <FileInfo>
+        <Attr Name="UserDisabled" Val="1"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <Config>
+      <Option Name="DesignMode" Val="RTL"/>
+      <Option Name="TopModule" Val="queue_block"/>
+      <Option Name="TopAutoSet" Val="TRUE"/>
+    </Config>
+  </FileSet>
+  <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1" RelGenDir="$PGENDIR/constrs_1">
+    <Filter Type="Constrs"/>
+    <File Path="$PSRCDIR/constrs_1/new/timing.xdc">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+      </FileInfo>
+    </File>
+    <Config>
+      <Option Name="ConstrsType" Val="XDC"/>
+    </Config>
+  </FileSet>
+  <FileSet Name="utils" Type="Utils" RelSrcDir="$PSRCDIR/utils_1" RelGenDir="$PGENDIR/utils_1">
+    <Filter Type="Utils"/>
+    <File Path="$PSRCDIR/utils_1/imports/synth_1/priority_queue.dcp">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedInSteps" Val="synth_1"/>
+        <Attr Name="AutoDcp" Val="1"/>
+      </FileInfo>
+    </File>
+    <Config>
+      <Option Name="TopAutoSet" Val="TRUE"/>
+    </Config>
+  </FileSet>
+  <Strategy Version="1" Minor="2">
+    <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023"/>
+    <Step Id="init_design"/>
+    <Step Id="opt_design"/>
+    <Step Id="power_opt_design"/>
+    <Step Id="place_design"/>
+    <Step Id="post_place_power_opt_design"/>
+    <Step Id="phys_opt_design"/>
+    <Step Id="route_design"/>
+    <Step Id="post_route_phys_opt_design"/>
+    <Step Id="write_bitstream"/>
+  </Strategy>
+</GenRun>
