@@ -23,8 +23,12 @@ var ISEJScriptLib = RDScrDir + "/ISEWrap.js";
 eval( EAInclude(ISEJScriptLib) );
 
 
+// pre-commands:
+ISETouchFile( "init_design", "begin" );
 ISEStep( "vivado",
-         "-log simple_dual_one_clock.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source simple_dual_one_clock.tcl" );
+         "-log simple_dual_one_clock.vdi -applog -m64 -product Vivado -messageDb vivado.pb -mode batch -source simple_dual_one_clock.tcl -notrace" );
+
+
 
 
 

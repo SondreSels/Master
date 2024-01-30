@@ -25,7 +25,7 @@ else
 fi
 export LD_LIBRARY_PATH
 
-HD_PWD='C:/Users/sondre.selsaas/OneDrive - AUTOSTORE AS/Documents/Master/project_2/project_2.runs/synth_1'
+HD_PWD='C:/Users/sondre.selsaas/OneDrive - AUTOSTORE AS/Documents/Master/project_2/project_2.runs/impl_1'
 cd "$HD_PWD"
 
 HD_LOG=runme.log
@@ -41,4 +41,8 @@ EAStep()
      fi
 }
 
-EAStep vivado -log simple_dual_one_clock.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source simple_dual_one_clock.tcl
+# pre-commands:
+/bin/touch .init_design.begin.rst
+EAStep vivado -log simple_dual_one_clock.vdi -applog -m64 -product Vivado -messageDb vivado.pb -mode batch -source simple_dual_one_clock.tcl -notrace
+
+

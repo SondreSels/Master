@@ -37,7 +37,7 @@ architecture Behavioral of g_scores is
 -- body. Substitute your own instance name and net names.
 begin
 ------------- Begin Cut here for INSTANTIATION Template ----- INST_TAG
-    g_scores : blk_mem_gen_0
+    g_scores_mem : blk_mem_gen_0
       PORT MAP (
         clka => clk,
         ena => ena,

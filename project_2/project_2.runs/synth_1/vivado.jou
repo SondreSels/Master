@@ -3,12 +3,12 @@
 # SW Build 3865809 on Sun May  7 15:05:29 MDT 2023
 # IP Build 3864474 on Sun May  7 20:36:21 MDT 2023
 # SharedData Build 3865790 on Sun May 07 13:33:03 MDT 2023
-# Start of session at: Tue Jan 30 10:59:58 2024
-# Process ID: 16676
+# Start of session at: Tue Jan 30 13:19:35 2024
+# Process ID: 7092
 # Current directory: C:/Users/sondre.selsaas/OneDrive - AUTOSTORE AS/Documents/Master/project_2/project_2.runs/synth_1
-# Command line: vivado.exe -log g_scores.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source g_scores.tcl
-# Log file: C:/Users/sondre.selsaas/OneDrive - AUTOSTORE AS/Documents/Master/project_2/project_2.runs/synth_1/g_scores.vds
+# Command line: vivado.exe -log simple_dual_one_clock.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source simple_dual_one_clock.tcl
+# Log file: C:/Users/sondre.selsaas/OneDrive - AUTOSTORE AS/Documents/Master/project_2/project_2.runs/synth_1/simple_dual_one_clock.vds
 # Journal file: C:/Users/sondre.selsaas/OneDrive - AUTOSTORE AS/Documents/Master/project_2/project_2.runs/synth_1\vivado.jou
 # Running On: LAPTOP-N0URHOHC, OS: Windows, CPU Frequency: 2803 MHz, CPU Physical cores: 14, Host memory: 16830 MB
 #-----------------------------------------------------------
-source g_scores.tcl -notrace
+source simple_dual_one_clock.tcl -notrace
