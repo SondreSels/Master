@@ -25,7 +25,7 @@ else
 fi
 export LD_LIBRARY_PATH
 
-HD_PWD='C:/Users/sondre.selsaas/project_2/project_2.runs/synth_1'
+HD_PWD='C:/Users/sondre.selsaas/OneDrive - AUTOSTORE AS/Documents/Master/project_2/project_2.runs/synth_1'
 cd "$HD_PWD"
 
 HD_LOG=runme.log
@@ -41,4 +41,4 @@ EAStep()
      fi
 }
 
-EAStep vivado -log queue_block.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source queue_block.tcl
+EAStep vivado -log g_scores.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source g_scores.tcl

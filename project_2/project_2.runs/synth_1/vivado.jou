@@ -3,12 +3,12 @@
 # SW Build 3865809 on Sun May  7 15:05:29 MDT 2023
 # IP Build 3864474 on Sun May  7 20:36:21 MDT 2023
 # SharedData Build 3865790 on Sun May 07 13:33:03 MDT 2023
-# Start of session at: Tue Nov 21 10:06:18 2023
-# Process ID: 15804
-# Current directory: C:/Users/sondre.selsaas/project_2/project_2.runs/synth_1
-# Command line: vivado.exe -log queue_block.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source queue_block.tcl
-# Log file: C:/Users/sondre.selsaas/project_2/project_2.runs/synth_1/queue_block.vds
-# Journal file: C:/Users/sondre.selsaas/project_2/project_2.runs/synth_1\vivado.jou
+# Start of session at: Tue Jan 30 10:59:58 2024
+# Process ID: 16676
+# Current directory: C:/Users/sondre.selsaas/OneDrive - AUTOSTORE AS/Documents/Master/project_2/project_2.runs/synth_1
+# Command line: vivado.exe -log g_scores.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source g_scores.tcl
+# Log file: C:/Users/sondre.selsaas/OneDrive - AUTOSTORE AS/Documents/Master/project_2/project_2.runs/synth_1/g_scores.vds
+# Journal file: C:/Users/sondre.selsaas/OneDrive - AUTOSTORE AS/Documents/Master/project_2/project_2.runs/synth_1\vivado.jou
 # Running On: LAPTOP-N0URHOHC, OS: Windows, CPU Frequency: 2803 MHz, CPU Physical cores: 14, Host memory: 16830 MB
 #-----------------------------------------------------------
-source queue_block.tcl -notrace
+source g_scores.tcl -notrace
