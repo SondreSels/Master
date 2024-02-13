@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7a200tfbg676-2" LaunchTime="1706617173" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/priority_queue.dcp">
-  <File Type="PA-TCL" Name="simple_dual_one_clock.tcl"/>
-  <File Type="RDS-PROPCONSTRS" Name="simple_dual_one_clock_drc_synth.rpt"/>
-  <File Type="REPORTS-TCL" Name="simple_dual_one_clock_reports.tcl"/>
-  <File Type="RDS-RDS" Name="simple_dual_one_clock.vds"/>
-  <File Type="RDS-UTIL" Name="simple_dual_one_clock_utilization_synth.rpt"/>
-  <File Type="RDS-UTIL-PB" Name="simple_dual_one_clock_utilization_synth.pb"/>
-  <File Type="RDS-DCP" Name="simple_dual_one_clock.dcp"/>
-  <File Type="VDS-TIMINGSUMMARY" Name="simple_dual_one_clock_timing_summary_synth.rpt"/>
-  <File Type="VDS-TIMING-PB" Name="simple_dual_one_clock_timing_summary_synth.pb"/>
+<GenRun Id="synth_1" LaunchPart="xc7a200tfbg676-2" LaunchTime="1707826776" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/priority_queue.dcp">
+  <File Type="PA-TCL" Name="g_scores.tcl"/>
+  <File Type="RDS-PROPCONSTRS" Name="g_scores_drc_synth.rpt"/>
+  <File Type="REPORTS-TCL" Name="g_scores_reports.tcl"/>
+  <File Type="RDS-RDS" Name="g_scores.vds"/>
+  <File Type="RDS-UTIL" Name="g_scores_utilization_synth.rpt"/>
+  <File Type="RDS-UTIL-PB" Name="g_scores_utilization_synth.pb"/>
+  <File Type="RDS-DCP" Name="g_scores.dcp"/>
+  <File Type="VDS-TIMINGSUMMARY" Name="g_scores_timing_summary_synth.rpt"/>
+  <File Type="VDS-TIMING-PB" Name="g_scores_timing_summary_synth.pb"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
     <Filter Type="Srcs"/>
     <File Path="$PSRCDIR/sources_1/new/g_scores_test.vhd">
@@ -18,6 +18,13 @@
       </FileInfo>
     </File>
     <File Path="$PSRCDIR/sources_1/new/Queue_block.vhd">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/closed_list.vhd">
       <FileInfo>
         <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="UsedIn" Val="synthesis"/>
@@ -54,7 +61,7 @@
     </File>
     <Config>
       <Option Name="DesignMode" Val="RTL"/>
-      <Option Name="TopModule" Val="simple_dual_one_clock"/>
+      <Option Name="TopModule" Val="g_scores"/>
     </Config>
   </FileSet>
   <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1" RelGenDir="$PGENDIR/constrs_1">

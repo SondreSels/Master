@@ -25,7 +25,7 @@ architecture Behavioral of priority_queue is
                temp_prev : in STD_LOGIC_VECTOR(31 downto 0);
                temp_next : out STD_LOGIC_VECTOR(31 downto 0));
     end component;
-    constant QUEUE_DEPTH : integer := 16; -- Example value, adjust as needed
+    constant QUEUE_DEPTH : integer := 253; -- Example value, adjust as needed
      -- Declare signals for connections between instances
     type data_t is array(0 to QUEUE_DEPTH) of STD_LOGIC_VECTOR(31 downto 0);
     signal to_queue_prev_signals : data_t := (others => (others => '1'));
@@ -63,6 +63,7 @@ begin
             temp_0 <= (others => '1');
             queue_n <= (others => '1');
             temp_n <= (others => '1');
+            prev_dequeue <= '0';
         elsif rising_edge(clk) then
             -- if dequeue is different from previous cycle
             if prev_dequeue /= dequeue then

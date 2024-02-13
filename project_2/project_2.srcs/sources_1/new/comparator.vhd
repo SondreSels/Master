@@ -24,6 +24,7 @@ architecture Behavioral of SmallestValueComparator is
     signal comp_1_2 : std_logic_vector(31 downto 0);
     signal comp_3_4 : std_logic_vector(31 downto 0);
     signal result : std_logic_vector(31 downto 0);
+    signal result_reg : std_logic_vector(31 downto 0);
     signal local_dequeue_1 : std_logic := '0';
     signal local_dequeue_2 : std_logic := '0';
     signal local_dequeue_3 : std_logic := '0';
@@ -36,7 +37,7 @@ begin
     comp_3_4 <= input_3 when input_3(15 downto 0) < input_4(15 downto 0) else input_4;
     
     result <= comp_1_2 when comp_1_2(15 downto 0) < comp_3_4(15 downto 0) else comp_3_4;
-    output_data <= result;
+    output_data <= result_reg;
 
     dequeue_1 <= local_dequeue_1;
     dequeue_2 <= local_dequeue_2;
@@ -45,6 +46,7 @@ begin
     process (step,clk)
     begin
         if rising_edge(clk) then  
+            result_reg <= result;
             if step /= prev_step then
                 if result = input_1 then
                     -- toggle dequeue_1
