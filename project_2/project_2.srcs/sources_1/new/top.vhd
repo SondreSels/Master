@@ -7,26 +7,9 @@ entity TopModule is
     Port (
         clk : in STD_LOGIC;
         reset : in STD_LOGIC;
-        in_data_1 : in STD_LOGIC_VECTOR(31 downto 0);
-        in_data_2 : in STD_LOGIC_VECTOR(31 downto 0);
-        in_data_3 : in STD_LOGIC_VECTOR(31 downto 0);
-        in_data_4 : in STD_LOGIC_VECTOR(31 downto 0);
-        enqueue_1 : in STD_LOGIC;
-        enqueue_2 : in STD_LOGIC;
-        enqueue_3 : in STD_LOGIC;
-        enqueue_4 : in STD_LOGIC;
-        out_data : out STD_LOGIC_VECTOR(31 downto 0);
-        ena_g_scores : in STD_LOGIC;
-        enb_g_scores : in STD_LOGIC;
-        wea_g_scores : in STD_LOGIC;
-        web_g_scores : in STD_LOGIC;
-        addra_g_scores : in STD_LOGIC_VECTOR(15 downto 0);
-        addrb_g_scores : in STD_LOGIC_VECTOR(15 downto 0);
-        dia_g_scores : in STD_LOGIC_VECTOR(31 downto 0);
-        doa_g_scores : out STD_LOGIC_VECTOR(31 downto 0);
-        dib_g_scores : in STD_LOGIC_VECTOR(31 downto 0);
-        dob_g_scores : out STD_LOGIC_VECTOR(31 downto 0);
-        dob_closed_list : out STD_LOGIC_VECTOR(0 downto 0)
+        startpos : in STD_LOGIC_VECTOR(15 downto 0);
+        endpos : in STD_LOGIC_VECTOR(15 downto 0);
+        start : in STD_LOGIC
     );
 end TopModule;
 
@@ -35,17 +18,37 @@ architecture Behavioral of TopModule is
     signal dequeue_2 : std_logic;
     signal dequeue_3 : std_logic;
     signal dequeue_4 : std_logic;
+    signal enqueue_1 : std_logic;
+    signal enqueue_2 : std_logic;
+    signal enqueue_3 : std_logic;
+    signal enqueue_4 : std_logic;
+    signal in_data_1 : std_logic_vector(31 downto 0);
+    signal in_data_2 : std_logic_vector(31 downto 0);
+    signal in_data_3 : std_logic_vector(31 downto 0);
+    signal in_data_4 : std_logic_vector(31 downto 0);
+    signal out_data : std_logic_vector(31 downto 0);
     signal out_data_comp : std_logic_vector(31 downto 0);
     signal out_data_pq_1, out_data_pq_2, out_data_pq_3, out_data_pq_4 : std_logic_vector(31 downto 0);
     signal out_data_g_scores : std_logic_vector(31 downto 0);
     signal out_data_closed_list : std_logic_vector(0 downto 0);
     signal step : STD_LOGIC := '0';
+    signal ena_g_scores : STD_LOGIC;
+    signal enb_g_scores : STD_LOGIC;
+    signal wea_g_scores : STD_LOGIC;
+    signal web_g_scores : STD_LOGIC;
+    signal addra_g_scores : STD_LOGIC_VECTOR(15 downto 0);
+    signal addrb_g_scores : STD_LOGIC_VECTOR(15 downto 0);
+    signal dia_g_scores : STD_LOGIC_VECTOR(31 downto 0);
+    signal doa_g_scores : std_logic_vector(31 downto 0);
+    signal dob_g_scores : std_logic_vector(31 downto 0);
+    signal dib_g_scores : std_logic_vector(31 downto 0);
     signal ena_closed_list : STD_LOGIC;
     signal enb_closed_list : STD_LOGIC;
     signal wea_closed_list : STD_LOGIC;
     signal addra_closed_list : STD_LOGIC_VECTOR(15 downto 0);
     signal addrb_closed_list : STD_LOGIC_VECTOR(15 downto 0);
     signal dia_closed_list : STD_LOGIC_VECTOR(0 downto 0);
+    signal dob_closed_list : std_logic_vector(0 downto 0);
     signal last_out_data_comp : std_logic_vector(31 downto 0) := (others => '0');  -- To store the last output value from the comparator
     signal neighbor_1 : std_logic_vector(15 downto 0);
     signal neighbor_2 : std_logic_vector(15 downto 0);
@@ -208,10 +211,11 @@ begin
                 wea_closed_list <= '1';
                 addra_closed_list <= out_data_comp(31 downto 16);
                 dia_closed_list <= "1";  -- Write '1' to the specified address
-                neighbor_1 <= out_data_comp(15 downto 0) + "0001";
-                neighbor_2 <= out_data_comp(15 downto 0) - "0001";
-                neighbor_3 <= out_data_comp(15 downto 0) + "0100";
-                neighbor_4 <= out_data_comp(15 downto 0) - "0100";
+                -- Find the neighbors of the current node where the first 8 bits are the x coordinate and the last 8 bits are the y coordinate
+                neighbor_1 <= out_data_comp(31 downto 16) + "0000000000000001";
+                neighbor_2 <= out_data_comp(31 downto 16) - "0000000000000001";
+                neighbor_3 <= out_data_comp(31 downto 16) + "0000000100000000";
+                neighbor_4 <= out_data_comp(31 downto 16) - "0000000100000000";
             else
                 ena_closed_list <= '0';
                 wea_closed_list <= '0';
