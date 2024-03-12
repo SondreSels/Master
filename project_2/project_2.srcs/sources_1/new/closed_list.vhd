@@ -15,8 +15,15 @@ entity closed_list is
 end closed_list;
 architecture syn of closed_list is
  type ram_type is array (65535 downto 0) of std_logic_vector(0 downto 0);
- shared variable RAM : ram_type := (others => (others => '0'));
+ shared variable RAM : ram_type := (
+        1282 => "1",   -- Initialize the specific address to 1
+        514 => "1",
+        others => (others => '0')
+    );
+ 
+
 begin
+
  process(clk)
  begin
  if clk'event and clk = '1' then

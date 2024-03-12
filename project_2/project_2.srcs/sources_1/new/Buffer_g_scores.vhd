@@ -40,6 +40,10 @@ entity Buffer_g_scores is
         in_buff_2 : in std_logic_vector(31 downto 0);
         in_buff_3 : in std_logic_vector(31 downto 0);
         in_buff_4 : in std_logic_vector(31 downto 0);
+        came_from_1 : in std_logic_vector(15 downto 0);
+        came_from_2 : in std_logic_vector(15 downto 0);
+        came_from_3 : in std_logic_vector(15 downto 0);
+        came_from_4 : in std_logic_vector(15 downto 0);
         read_addr : in std_logic_vector(15 downto 0);
         out_data : out std_logic_vector(31 downto 0)
      );
@@ -52,7 +56,6 @@ architecture Behavioral of Buffer_g_scores is
     signal enb : std_logic := '1';
     signal addra : std_logic_vector(15 downto 0);
     signal dia, dob : std_logic_vector(31 downto 0);
-    signal buff_1, buff_2, buff_3, buff_4 : std_logic_vector(31 downto 0) := (others => '0');
     signal g_scores_out : std_logic_vector(31 downto 0) := (others => '0');
 
 component g_scores
@@ -86,43 +89,47 @@ begin
             case state is
                 when one =>
                     wea <= '1';
-                    addra <= buff_1(31 downto 16);
-                    dia <= buff_1;
+                    addra <= in_buff_1(31 downto 16);
+                    dia(31 downto 16) <= came_from_1;
+                    dia(15 downto 0) <= in_buff_1(15 downto 0);
                     state <= two;
                 when two =>
                     wea <= '1';
-                    addra <= buff_2(31 downto 16);
-                    dia <= buff_2;
+                    addra <= in_buff_2(31 downto 16);
+                    dia(31 downto 16) <= came_from_2;
+                    dia(15 downto 0) <= in_buff_2(15 downto 0);
                     state <= three;
                 when three =>
                     wea <= '1';
-                    addra <= buff_3(31 downto 16);
-                    dia <= buff_3;
+                    addra <= in_buff_3(31 downto 16);
+                    dia(31 downto 16) <= came_from_3;
+                    dia(15 downto 0) <= in_buff_3(15 downto 0);
                     state <= four;
                 when four =>
                     wea <= '1';
-                    addra <= buff_4(31 downto 16);
-                    dia <= buff_4;
+                    addra <= in_buff_4(31 downto 16);
+                    dia(31 downto 16) <= came_from_4;
+                    dia(15 downto 0) <= in_buff_4(15 downto 0);
                     state <= one;
             end case;
-            buff_1 <= in_buff_1;
-            buff_2 <= in_buff_2;
-            buff_3 <= in_buff_3;
-            buff_4 <= in_buff_4;
         end if;
     end process;
 
     process(clk, read_addr)
     begin
         if rising_edge(clk) then
-            if read_addr = buff_1(31 downto 16) then
-                g_scores_out <= buff_1;
-            elsif read_addr = buff_2(31 downto 16) then
-                g_scores_out <= buff_2;
-            elsif read_addr = buff_3(31 downto 16) then
-                g_scores_out <= buff_3;
-            elsif read_addr = buff_4(31 downto 16) then
-                g_scores_out <= buff_4;
+            if read_addr = in_buff_1(31 downto 16) then
+                g_scores_out(31 downto 16) <= came_from_1;
+                g_scores_out(15 downto 0) <= in_buff_1(15 downto 0);
+            elsif read_addr = in_buff_2(31 downto 16) then
+                g_scores_out(31 downto 16) <= came_from_2;
+                g_scores_out(15 downto 0) <= in_buff_2(15 downto 0);
+            elsif read_addr = in_buff_3(31 downto 16) then
+                g_scores_out(31 downto 16) <= came_from_3;
+                g_scores_out(15 downto 0) <= in_buff_3(15 downto 0);
+            elsif read_addr = in_buff_4(31 downto 16) then
+                g_scores_out(31 downto 16) <= came_from_4;
+                g_scores_out(15 downto 0) <= in_buff_4(15 downto 0);
             else
                 -- Get the data from the g_scores
                 g_scores_out <= dob;
