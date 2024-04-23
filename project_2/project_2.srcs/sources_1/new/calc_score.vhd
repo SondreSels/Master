@@ -31,14 +31,18 @@ architecture Behavioral of calc_score is
     signal do_enqueue_2 : std_logic := '0';
     signal do_enqueue_3 : std_logic := '0';
     signal temp_g_score : unsigned(15 downto 0) := (others => '0');
+    -- penalty signal initialized to 10
+    signal penalty : unsigned(15 downto 0) := "0000000000000101";
     
 
 begin
     x <= abs(signed(new_pos(15 downto 8)) - signed(endpos(15 downto 8)));
     y <= abs(signed(new_pos(7 downto 0)) - signed(endpos(7 downto 0)));
+
     
-    score <= temp_g_score + unsigned(x) + unsigned(y);
-    temp_g_score <= (unsigned(score_in) + 1) when (this_dir = '1') else (unsigned(score_in) + 1);
+    
+    score <= temp_g_score + unsigned(x) + unsigned(y) +  1 when (x > 0 and y > 0) else temp_g_score + unsigned(x) + unsigned(y);
+    temp_g_score <= (unsigned(score_in) + 1) when (this_dir = '1') else (unsigned(score_in) + 2);
     enqueue <= prev_enqueue;
     process(clk, reset)
     begin
@@ -55,14 +59,6 @@ begin
             end if;
             if do_enqueue_1 = '1' then
                 do_enqueue_1 <= '0';
-                do_enqueue_2 <= '1';
-            end if;
-            if do_enqueue_2 = '1' then
-                do_enqueue_2 <= '0';
-                do_enqueue_3 <= '1';
-            end if;
-            if do_enqueue_3 = '1' then
-                do_enqueue_3 <= '0';
                 if closed = '0' then
                     score_out <= std_logic_vector(score);
                     g_score_out <= std_logic_vector(temp_g_score);

@@ -25,7 +25,7 @@ architecture Behavioral of priority_queue is
                temp_prev : in STD_LOGIC_VECTOR(31 downto 0);
                temp_next : out STD_LOGIC_VECTOR(31 downto 0));
     end component;
-    constant QUEUE_DEPTH : integer := 253; -- Example value, adjust as needed
+    constant QUEUE_DEPTH : integer := 254; -- Example value, adjust as needed
      -- Declare signals for connections between instances
     type data_t is array(0 to QUEUE_DEPTH) of STD_LOGIC_VECTOR(31 downto 0);
     signal to_queue_prev_signals : data_t := (others => (others => '1'));
@@ -36,6 +36,7 @@ architecture Behavioral of priority_queue is
     signal temp_n : STD_LOGIC_VECTOR(31 downto 0) := (others => '1');
     signal queue_n : STD_LOGIC_VECTOR(31 downto 0) := (others => '1');
     signal prev_dequeue : STD_LOGIC := '0';
+    signal to_block_dequeue : STD_LOGIC := '0';
     signal prev_enqueue : STD_LOGIC := '0';
 
 
@@ -46,7 +47,7 @@ begin
             port map (
                 clk => clk,
                 reset => reset,
-                dequeue => dequeue,
+                dequeue => to_block_dequeue,
                 to_temp_prev => to_temp_prev_signals(i),
                 to_queue_prev => to_queue_prev_signals(i),
                 from_temp_next => to_temp_prev_signals(i+1),
@@ -65,6 +66,9 @@ begin
             temp_n <= (others => '1');
             prev_dequeue <= '0';
         elsif rising_edge(clk) then
+            if to_block_dequeue = '1' then
+                to_block_dequeue <= '0';
+            end if;
             -- if dequeue is different from previous cycle
             if prev_dequeue /= dequeue then
                 queue_0 <= to_queue_prev_signals(0);
@@ -72,6 +76,7 @@ begin
                 queue_n <= (others => '1');
                 temp_n <= (others => '1');
                 prev_dequeue <= dequeue;
+                to_block_dequeue <= '1';
             else
                 if prev_enqueue /= enqueue then
                     if in_data(15 downto 0) < queue_0(15 downto 0) then

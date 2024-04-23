@@ -431,6 +431,7 @@ begin
             came_from_reg <= out_data_g_scores(31 downto 16);
 
         elsif rising_edge(clk) then
+            read_addr <= out_data_comp(31 downto 16);
             if start = '1' then
                 neighbor_1 <= std_logic_vector(unsigned(startpos) + 1);
                 neighbor_2 <= std_logic_vector(unsigned(startpos) - 1);
@@ -438,9 +439,10 @@ begin
                 neighbor_4 <= std_logic_vector(unsigned(startpos) - 256);
                 cur_pos <= startpos;
             else 
+                cur_pos <= out_data_comp(31 downto 16);
                 counter <= counter + 1;
             end if;
-            if counter = "110" then
+            if counter = "101" then
                 if out_data_comp(31 downto 16) = endpos then
                     done_reg <= '1';
                 else
@@ -461,13 +463,11 @@ begin
                     dia_closed_list_2 <= "1";
                     dia_closed_list_3 <= "1";
                     dia_closed_list_4 <= "1";
-                    read_addr <= out_data_comp(31 downto 16);
                     -- Find the neighbors of the current node where the first 8 bits are the x coordinate and the last 8 bits are the y coordinate
                     neighbor_1 <= std_logic_vector(unsigned(out_data_comp(31 downto 16)) + 1);
                     neighbor_2 <= std_logic_vector(unsigned(out_data_comp(31 downto 16)) - 1);
                     neighbor_3 <= std_logic_vector(unsigned(out_data_comp(31 downto 16)) + 256);
                     neighbor_4 <= std_logic_vector(unsigned(out_data_comp(31 downto 16)) - 256);
-                    cur_pos <= out_data_comp(31 downto 16);
                 end if;
                 counter <= (others => '0');
             else
