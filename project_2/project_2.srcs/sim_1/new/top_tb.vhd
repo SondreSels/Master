@@ -22,7 +22,7 @@ architecture testbench of tb_TopModule is
     constant clk_period : time := 10 ns; -- Adjust the period as needed
 
     -- Testbench variable for storing all the different out_pos values
-    type pos_array is array (0 to 500) of std_logic_vector(15 downto 0);
+    type pos_array is array (0 to 5000) of std_logic_vector(15 downto 0);
     shared variable pos : pos_array;
     shared variable came_from : pos_array;
     -- index for the pos array
@@ -60,7 +60,7 @@ architecture testbench of tb_TopModule is
 
         clock_process: process
         begin
-            while now < 20000 ns loop  -- Simulate for 5000 ns
+            while now < 200000 ns loop  -- Simulate for 5000 ns
                 clk <= '0';
                 wait for clk_period / 2;
                 clk <= '1';
@@ -73,16 +73,17 @@ architecture testbench of tb_TopModule is
         begin
             -- Initialize
             reset <= '1';
-            wait for 50 ns;
+             -- set startpos to (18,22)
+            startpos <= "0001001000010110";
+            -- set endpos to (64,64)
+            endpos <= "0100000001000000";
+            wait for 150 ns;
             start <= '1';
             reset <= '0';
-            wait for 10 ns;
-            -- set startpos to (2,2)
-            startpos <= "0000001000000010";
-            -- set endpos to (16,16)
-            endpos <= "0010000000100000";            
+           
+                       
 
-            wait for 10 ns;
+            wait for 40 ns;
             start <= '0';
 
             wait for 5000 ns;  -- Simulate for 5000 ns
@@ -94,7 +95,7 @@ architecture testbench of tb_TopModule is
         -- When out_pos changes, store the value in the pos array
         pos_store: process
         begin
-            while now < 20000 ns loop
+            while now < 200000 ns loop
                 if out_pos /= pos(pos_index - 1) then
                     pos(pos_index) := out_pos;
                     pos_index := pos_index + 1;
@@ -104,20 +105,22 @@ architecture testbench of tb_TopModule is
             wait;
         end process;
 
-        came_from_store: process
-        begin
-            wait until done = '1';
-            while now < 20000 ns loop
-                if came_from_pos = startpos then
-                    -- do nothing
-                    
-                elsif came_from_pos /= came_from(came_from_index - 1) then
-                    came_from(came_from_index) := came_from_pos;
-                    came_from_index := came_from_index + 1;
-                end if;
-                wait for 1 ns;
-            end loop;
-        end process;
+        -- came_from_store: process
+        -- begin
+        --     wait until done = '1';
+        --     while now < 200000 ns loop
+        --         if came_from_pos = startpos then
+        --             -- do nothing
+        --         elsif came_from_pos = endpos then
+        --             -- break out of the loop
+        --             exit;
+        --         elsif came_from_pos /= came_from(came_from_index - 1) then
+        --             came_from(came_from_index) := came_from_pos;
+        --             came_from_index := came_from_index + 1;
+        --         end if;
+        --         wait for 1 ns;
+        --     end loop;
+        -- end process;
 
         -- When the simulation is done, write the pos array to a file
         end_simulation: process
@@ -127,7 +130,7 @@ architecture testbench of tb_TopModule is
         variable l : line;
         variable line : line;
         begin
-            while now < 20000 ns loop
+            while now < 200000 ns loop
                 wait for 1 ns;
             end loop;
             -- write a test line to the file of a std_logic_vector to make sure it is workin

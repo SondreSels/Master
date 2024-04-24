@@ -32,7 +32,7 @@ architecture Behavioral of TopModule is
     signal out_data : std_logic_vector(31 downto 0);
     signal out_data_comp : std_logic_vector(31 downto 0) := (others => '1');
     signal out_data_pq_1, out_data_pq_2, out_data_pq_3, out_data_pq_4 : std_logic_vector(31 downto 0);
-    signal out_data_g_scores : std_logic_vector(31 downto 0);
+    signal out_data_g_scores : std_logic_vector(31 downto 0) := (others => '1');
     signal out_data_closed_list : std_logic_vector(0 downto 0);
     signal step : STD_LOGIC := '0';
     signal ena_g_scores : STD_LOGIC;
@@ -87,7 +87,7 @@ architecture Behavioral of TopModule is
     signal g_score_4 : std_logic_vector(15 downto 0) := (others => '1');
     signal read_a : std_logic := '0';
     signal read_addr : std_logic_vector(15 downto 0) := "0000000000000001";
-    signal counter : unsigned(2 downto 0) := (others => '0');
+    signal counter : unsigned(3 downto 0) := (others => '0');
     signal cur_pos : std_logic_vector(15 downto 0) := "0000000000000000";
     signal out_pos_calc_1 : std_logic_vector(15 downto 0);
     signal out_pos_calc_2 : std_logic_vector(15 downto 0);
@@ -177,14 +177,14 @@ architecture Behavioral of TopModule is
         out_pos : out  STD_LOGIC_VECTOR (15 downto 0);
         cur_pos : in  STD_LOGIC_VECTOR (15 downto 0);
         came_from : out  STD_LOGIC_VECTOR (15 downto 0);
-        this_dir : in STD_LOGIC;
-        enqueue : out  STD_LOGIC
+        this_dir : in STD_LOGIC
     );
     end component;
 
     component Buffer_g_scores
         Port (
         clk : in std_logic;
+        reset : in std_logic;
         in_buff_1 : in std_logic_vector(31 downto 0);
         in_buff_2 : in std_logic_vector(31 downto 0);
         in_buff_3 : in std_logic_vector(31 downto 0);
@@ -193,6 +193,14 @@ architecture Behavioral of TopModule is
         came_from_2 : in std_logic_vector(15 downto 0);
         came_from_3 : in std_logic_vector(15 downto 0);
         came_from_4 : in std_logic_vector(15 downto 0);
+        g_score_1 : in std_logic_vector(15 downto 0);
+        g_score_2 : in std_logic_vector(15 downto 0);
+        g_score_3 : in std_logic_vector(15 downto 0);
+        g_score_4 : in std_logic_vector(15 downto 0);
+        enqueue_1 : out std_logic;
+        enqueue_2 : out std_logic;
+        enqueue_3 : out std_logic;
+        enqueue_4 : out std_logic;
         read_addr : in std_logic_vector(15 downto 0);
         out_data : out std_logic_vector(31 downto 0)
      );
@@ -203,6 +211,7 @@ begin
     buffer_g_scores_inst: Buffer_g_scores
         port map (
             clk => clk,
+            reset => reset,
             in_buff_1(31 downto 16) => out_pos_calc_1,
             in_buff_1(15 downto 0) => g_score_1,
             in_buff_2(31 downto 16) => out_pos_calc_2,
@@ -215,6 +224,14 @@ begin
             came_from_2 => came_from_2,
             came_from_3 => came_from_3,
             came_from_4 => came_from_4,
+            g_score_1 => g_score_1,
+            g_score_2 => g_score_2,
+            g_score_3 => g_score_3,
+            g_score_4 => g_score_4,
+            enqueue_1 => enqueue_1,
+            enqueue_2 => enqueue_2,
+            enqueue_3 => enqueue_3,
+            enqueue_4 => enqueue_4,
             read_addr => read_addr,
             out_data => out_data_g_scores
         );
@@ -233,8 +250,7 @@ begin
             out_pos => out_pos_calc_1,
             cur_pos => cur_pos,
             came_from => came_from_1,
-            this_dir => NORTH,
-            enqueue => enqueue_1
+            this_dir => NORTH
         );
     
     calc_score_2: calc_score
@@ -250,8 +266,7 @@ begin
             out_pos => out_pos_calc_2,
             cur_pos => cur_pos,
             came_from => came_from_2,
-            this_dir => SOUTH,
-            enqueue => enqueue_2
+            this_dir => SOUTH
         );
 
     calc_score_3: calc_score
@@ -267,8 +282,7 @@ begin
             out_pos => out_pos_calc_3,
             cur_pos => cur_pos,
             came_from => came_from_3,
-            this_dir => EAST,
-            enqueue => enqueue_3
+            this_dir => EAST
         );
     
     calc_score_4: calc_score
@@ -284,8 +298,7 @@ begin
             out_pos => out_pos_calc_4,
             cur_pos => cur_pos,
             came_from => came_from_4,
-            this_dir => WEST,
-            enqueue => enqueue_4
+            this_dir => WEST
         );
     -- Instantiate 4 priority_queue modules
     priority_queue_1: priority_queue
@@ -400,7 +413,6 @@ begin
     -- Output the result
     out_data <= out_data_comp;
     output_data <= out_data;
-    out_pos <= cur_pos;
     done <= done_reg;
     came_from_pos <= came_from_reg;
     
@@ -427,8 +439,12 @@ begin
             cur_pos <= "0000000000000000";
         
         elsif done_reg = '1' then
-            read_addr <= out_data_g_scores(31 downto 16);
-            came_from_reg <= out_data_g_scores(31 downto 16);
+            if out_data_g_scores(31 downto 16) = "0000000000000000" then
+                
+            else
+                read_addr <= out_data_g_scores(31 downto 16);
+                came_from_reg <= out_data_g_scores(31 downto 16);
+            end if;
 
         elsif rising_edge(clk) then
             read_addr <= out_data_comp(31 downto 16);
@@ -442,32 +458,33 @@ begin
                 cur_pos <= out_data_comp(31 downto 16);
                 counter <= counter + 1;
             end if;
-            if counter = "101" then
+            if counter = "1101" then
                 if out_data_comp(31 downto 16) = endpos then
                     done_reg <= '1';
                 else
                     step <= not step;  -- Toggle step
-                    ena_closed_list_1 <= '1';
-                    wea_closed_list_1 <= '1';
-                    ena_closed_list_2 <= '1';
-                    wea_closed_list_2 <= '1';
-                    ena_closed_list_3 <= '1';
-                    wea_closed_list_3 <= '1';
-                    ena_closed_list_4 <= '1';
-                    wea_closed_list_4 <= '1';
-                    addra_closed_list_1 <= out_data_comp(31 downto 16);
-                    addra_closed_list_2 <= out_data_comp(31 downto 16);
-                    addra_closed_list_3 <= out_data_comp(31 downto 16);
-                    addra_closed_list_4 <= out_data_comp(31 downto 16);
-                    dia_closed_list_1 <= "1";
-                    dia_closed_list_2 <= "1";
-                    dia_closed_list_3 <= "1";
-                    dia_closed_list_4 <= "1";
+                    -- ena_closed_list_1 <= '1';
+                    -- wea_closed_list_1 <= '1';
+                    -- ena_closed_list_2 <= '1';
+                    -- wea_closed_list_2 <= '1';
+                    -- ena_closed_list_3 <= '1';
+                    -- wea_closed_list_3 <= '1';
+                    -- ena_closed_list_4 <= '1';
+                    -- wea_closed_list_4 <= '1';
+                    -- addra_closed_list_1 <= out_data_comp(31 downto 16);
+                    -- addra_closed_list_2 <= out_data_comp(31 downto 16);
+                    -- addra_closed_list_3 <= out_data_comp(31 downto 16);
+                    -- addra_closed_list_4 <= out_data_comp(31 downto 16);
+                    -- dia_closed_list_1 <= "1";
+                    -- dia_closed_list_2 <= "1";
+                    -- dia_closed_list_3 <= "1";
+                    -- dia_closed_list_4 <= "1";
                     -- Find the neighbors of the current node where the first 8 bits are the x coordinate and the last 8 bits are the y coordinate
                     neighbor_1 <= std_logic_vector(unsigned(out_data_comp(31 downto 16)) + 1);
                     neighbor_2 <= std_logic_vector(unsigned(out_data_comp(31 downto 16)) - 1);
                     neighbor_3 <= std_logic_vector(unsigned(out_data_comp(31 downto 16)) + 256);
                     neighbor_4 <= std_logic_vector(unsigned(out_data_comp(31 downto 16)) - 256);
+                    out_pos <= cur_pos;
                 end if;
                 counter <= (others => '0');
             else

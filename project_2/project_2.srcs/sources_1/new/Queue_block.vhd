@@ -33,7 +33,7 @@ begin
                 temp <= from_temp_next;
             else
                 -- Compare the last 16 bits of the data
-                if temp_prev(15 downto 0) < queue(15 downto 0) then
+                if temp_prev(15 downto 0) <= queue(15 downto 0) then
                     queue <= temp_prev;
                     temp <= queue;
                 else

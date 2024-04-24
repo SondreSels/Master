@@ -16,23 +16,20 @@ entity calc_score is
         out_pos : out  STD_LOGIC_VECTOR (15 downto 0);
         cur_pos : in  STD_LOGIC_VECTOR (15 downto 0);
         came_from : out  STD_LOGIC_VECTOR (15 downto 0);
-        this_dir : in STD_LOGIC;
-        enqueue : out  STD_LOGIC
+        this_dir : in STD_LOGIC
     );
 end calc_score;
 
 architecture Behavioral of calc_score is
     signal x : signed (7 downto 0);
     signal y : signed (7 downto 0);
-    signal score : unsigned (15 downto 0) := (others => '0');
+    signal score : unsigned (15 downto 0) := (others => '1');
     signal prev_pos : std_logic_vector(15 downto 0) := (others => '1');
-    signal prev_enqueue : std_logic := '0';
     signal do_enqueue_1 : std_logic := '0';
     signal do_enqueue_2 : std_logic := '0';
     signal do_enqueue_3 : std_logic := '0';
-    signal temp_g_score : unsigned(15 downto 0) := (others => '0');
+    signal temp_g_score : unsigned(15 downto 0) := (others => '1');
     -- penalty signal initialized to 10
-    signal penalty : unsigned(15 downto 0) := "0000000000000101";
     
 
 begin
@@ -41,14 +38,12 @@ begin
 
     
     
-    score <= temp_g_score + unsigned(x) + unsigned(y) +  1 when (x > 0 and y > 0) else temp_g_score + unsigned(x) + unsigned(y);
-    temp_g_score <= (unsigned(score_in) + 1) when (this_dir = '1') else (unsigned(score_in) + 2);
-    enqueue <= prev_enqueue;
+    score <= temp_g_score + unsigned(x) + unsigned(y) + 2 when (x > 0 and y > 0) else temp_g_score + unsigned(x) + unsigned(y);
+    temp_g_score <= (unsigned(score_in) + 1) when (this_dir = '1') else (unsigned(score_in) + 3);
     process(clk, reset)
     begin
         if reset = '1' then
             score_out <= (others => '0');
-            prev_enqueue <= '0';
         elsif rising_edge(clk) then
             -- Calculate Manhattan distance and add it to score_in
             
@@ -59,10 +54,9 @@ begin
             end if;
             if do_enqueue_1 = '1' then
                 do_enqueue_1 <= '0';
-                if closed = '0' then
+                if (closed = '0') then
                     score_out <= std_logic_vector(score);
                     g_score_out <= std_logic_vector(temp_g_score);
-                    prev_enqueue <= not prev_enqueue;
                     out_pos <= prev_pos;
                     came_from <= cur_pos;
                 end if;

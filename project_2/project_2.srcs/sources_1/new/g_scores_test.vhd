@@ -5,16 +5,20 @@ entity g_scores is
  port(
  clk : in std_logic;
  enb : in std_logic;
+ ena : in std_logic;
  wea : in std_logic;
  addra : in std_logic_vector(15 downto 0);
  addrb : in std_logic_vector(15 downto 0);
  dia : in std_logic_vector(31 downto 0);
+ doa : out std_logic_vector(31 downto 0);
  dob : out std_logic_vector(31 downto 0)
  );
 end g_scores;
 architecture syn of g_scores is
  type ram_type is array (65535 downto 0) of std_logic_vector(31 downto 0);
- shared variable RAM : ram_type := (others => (others => '0'));
+ shared variable RAM : ram_type := (
+    0 => (others => '1'),
+    others => (others => '1'));
 begin
  process(clk)
  begin
@@ -22,6 +26,9 @@ begin
  if wea = '1' then
  RAM(conv_integer(addra)) := dia;
  end if;
+ if ena = '1' then
+    doa <= RAM(conv_integer(addra));
+end if;
  end if;
  end process;
  process(clk)

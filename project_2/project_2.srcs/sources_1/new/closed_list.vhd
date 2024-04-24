@@ -16,8 +16,23 @@ end closed_list;
 architecture syn of closed_list is
  type ram_type is array (65535 downto 0) of std_logic_vector(0 downto 0);
  shared variable RAM : ram_type := (
-        1282 => "1",   -- Initialize the specific address to 1
+        -- 1282 => "1",
+        -- 1283 => "1",
+        -- 1284 => "1",   -- Initialize the specific address to 1
+        -- 1285 => "1",
+        -- 1286 => "1",
+        -- 1287 => "1",
+        -- 1288 => "1",
+        -- 1289 => "1",
+        -- 5131 => "1",
+        -- 1028 => "1",
         514 => "1",
+        18476 => "1",
+        --8214 => "1",
+        4640 => "1",
+        7200 => "1",
+        7201 => "1",
+        16435 => "1",
         others => (others => '0')
     );
  

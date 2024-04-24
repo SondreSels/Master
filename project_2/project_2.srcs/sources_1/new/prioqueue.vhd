@@ -79,7 +79,7 @@ begin
                 to_block_dequeue <= '1';
             else
                 if prev_enqueue /= enqueue then
-                    if in_data(15 downto 0) < queue_0(15 downto 0) then
+                    if in_data(15 downto 0) <= queue_0(15 downto 0) then
                         queue_0 <= in_data;
                         temp_0 <= queue_0;
                     else
@@ -89,7 +89,7 @@ begin
                 else
                     temp_0 <= (others => '1');
                 end if;
-                if temp_prev_signals(QUEUE_DEPTH)(15 downto 0) < queue_n(15 downto 0) then
+                if temp_prev_signals(QUEUE_DEPTH)(15 downto 0) <= queue_n(15 downto 0) then
                     queue_n <= temp_prev_signals(QUEUE_DEPTH);
                     temp_n <= queue_n;
                 else
