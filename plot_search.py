@@ -2,8 +2,25 @@ import matplotlib.pyplot as plt
 import time
 
 # start position
-start = (2, 2)
-end = (32, 32)
+start = (20, 20)
+end = (64, 64)
+
+def integer_to_position(integer_position):
+    # Convert integer to binary string
+    binary_position = format(integer_position, '016b')  # 16 bits total (8 bits for x, 8 bits for y)
+
+    # Extract x and y binary strings
+    binary_x = binary_position[:8]
+    binary_y = binary_position[8:]
+
+    # Convert binary strings to integers
+    x_coordinate = int(binary_x, 2)
+    y_coordinate = int(binary_y, 2)
+
+    return x_coordinate, y_coordinate
+
+# list of integers 
+integers = [8214, 4640]
 
 # Function to read coordinates from the file
 def read_coordinates(file_path):
@@ -14,12 +31,18 @@ def read_coordinates(file_path):
 # Function to plot coordinates on a grid
 def plot_coordinates(coordinates, coordinates2):
     fig, ax = plt.subplots()
-    ax.set_xlim(-10, 40)
-    ax.set_ylim(-10, 40)
+    ax.set_xlim(-10, 75)
+    ax.set_ylim(-10, 75)
     ax.add_patch(plt.Rectangle(start, 1, 1, color='green'))
     ax.add_patch(plt.Rectangle(end, 1, 1, color='red'))
-    plt.draw()
 
+    # plot the integers
+    for integer in integers:
+        x, y = integer_to_position(integer)
+        ax.add_patch(plt.Rectangle((x, y), 1, 1, color='black'))
+        
+    plt.draw()
+    used = []
     for coord in coordinates:
         x_binary = coord[:8]
         y_binary = coord[8:]
@@ -29,11 +52,17 @@ def plot_coordinates(coordinates, coordinates2):
         # If the coordinate is the start or end position, skip plotting it
         if (x_decimal, y_decimal) == start or (x_decimal, y_decimal) == end:
             continue
-
-        ax.add_patch(plt.Rectangle((x_decimal, y_decimal), 1, 1, color='blue'))
+        # if the coordinate is already used, toggle the color
+        if (x_decimal, y_decimal) in used:
+            ax.add_patch(plt.Rectangle((x_decimal, y_decimal), 1, 1, color='orange'))
+            used.remove((x_decimal, y_decimal))
+        else:
+            ax.add_patch(plt.Rectangle((x_decimal, y_decimal), 1, 1, color='blue'))
+            used.append((x_decimal, y_decimal))
+        
         plt.draw()
-        plt.pause(0.01)  # Adjust the pause time as needed
-        time.sleep(0.01)
+        plt.pause(0.0001)  # Adjust the pause time as needed
+        time.sleep(0.0001)
     
     for coord in coordinates2:
         x_binary = coord[:8]

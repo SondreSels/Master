@@ -41,7 +41,7 @@ begin
 
     
     
-    score <= temp_g_score + unsigned(x) + unsigned(y) +  1 when (x > 0 and y > 0) else temp_g_score + unsigned(x) + unsigned(y);
+    score <= temp_g_score + unsigned(x) + unsigned(y) +  2 when (x > 0 and y > 0) else temp_g_score + unsigned(x) + unsigned(y);
     temp_g_score <= (unsigned(score_in) + 1) when (this_dir = '1') else (unsigned(score_in) + 2);
     enqueue <= prev_enqueue;
     process(clk, reset)

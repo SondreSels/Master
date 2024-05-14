@@ -400,7 +400,6 @@ begin
     -- Output the result
     out_data <= out_data_comp;
     output_data <= out_data;
-    out_pos <= cur_pos;
     done <= done_reg;
     came_from_pos <= came_from_reg;
     
@@ -468,6 +467,7 @@ begin
                     neighbor_2 <= std_logic_vector(unsigned(out_data_comp(31 downto 16)) - 1);
                     neighbor_3 <= std_logic_vector(unsigned(out_data_comp(31 downto 16)) + 256);
                     neighbor_4 <= std_logic_vector(unsigned(out_data_comp(31 downto 16)) - 256);
+                    out_pos <= cur_pos;
                 end if;
                 counter <= (others => '0');
             else

@@ -78,9 +78,9 @@ architecture testbench of tb_TopModule is
             reset <= '0';
             wait for 10 ns;
             -- set startpos to (2,2)
-            startpos <= "0000001000000010";
-            -- set endpos to (16,16)
-            endpos <= "0010000000100000";            
+            startpos <= "0000000100000001";
+            -- set endpos to (70,70)
+            endpos <= "0100011001000110";            
 
             wait for 10 ns;
             start <= '0';

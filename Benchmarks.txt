@@ -1,0 +1,13 @@
+10%
+Average number of expansions: 39954.9875
+Size of expansion list: 10000
+Blocking percentage: 0.1
+Average number of expansions: 41123.358
+Size of expansion list: 10000
+Blocking percentage: 0.2
+Average number of expansions: 38349.3631
+Size of expansion list: 10000
+Blocking percentage: 0.3
+Average number of expansions: 22130.2411
+Size of expansion list: 10000
+Blocking percentage: 0.4
