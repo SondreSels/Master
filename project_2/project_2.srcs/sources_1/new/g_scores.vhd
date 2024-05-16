@@ -1,61 +1,35 @@
 library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.STD_LOGIC_ARITH.ALL;
-use IEEE.STD_LOGIC_UNSIGNED.ALL;
-
+use IEEE.std_logic_1164.all;
+use IEEE.std_logic_unsigned.all;
 entity g_scores is
-    PORT (
-        clk : IN STD_LOGIC;
-        ena : IN STD_LOGIC;
-        wea : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
-        addra : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
-        dina : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
-        enb : IN STD_LOGIC;
-        addrb : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
-        doutb : OUT STD_LOGIC_VECTOR(31 DOWNTO 0) 
-      );
+ port(
+ clk : in std_logic;
+ enb : in std_logic;
+ wea : in std_logic;
+ addra : in std_logic_vector(15 downto 0);
+ addrb : in std_logic_vector(15 downto 0);
+ dia : in std_logic_vector(31 downto 0);
+ dob : out std_logic_vector(31 downto 0)
+ );
 end g_scores;
-
-architecture Behavioral of g_scores is
-------------- Begin Cut here for COMPONENT Declaration ------ COMP_TAG
-    component blk_mem_gen_0
-      PORT (
-        clka : IN STD_LOGIC;
-        ena : IN STD_LOGIC;
-        wea : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
-        addra : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
-        dina : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
-        clkb : IN STD_LOGIC;
-        enb : IN STD_LOGIC;
-        addrb : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
-        doutb : OUT STD_LOGIC_VECTOR(31 DOWNTO 0) 
-      );
-    end component;
--- COMP_TAG_END ------ End COMPONENT Declaration ------------
-
--- The following code must appear in the VHDL architecture
--- body. Substitute your own instance name and net names.
+architecture syn of g_scores is
+ type ram_type is array (65535 downto 0) of std_logic_vector(31 downto 0);
+ shared variable RAM : ram_type := (others => (others => '0'));
 begin
-------------- Begin Cut here for INSTANTIATION Template ----- INST_TAG
-    g_scores_mem : blk_mem_gen_0
-      PORT MAP (
-        clka => clk,
-        ena => ena,
-        wea => wea,
-        addra => addra,
-        dina => dina,
-        clkb => clk,
-        enb => enb,
-        addrb => addrb,
-        doutb => doutb
-      );
-      
-end Behavioral;
--- INST_TAG_END ------ End INSTANTIATION Template ---------
-
--- You must compile the wrapper file blk_mem_gen_0.vhd when simulating
--- the core, blk_mem_gen_0. When compiling the wrapper file, be sure to
--- reference the VHDL simulation library.
-
-
-
+ process(clk)
+ begin
+ if clk'event and clk = '1' then
+ if wea = '1' then
+ RAM(conv_integer(addra)) := dia;
+ end if;
+ end if;
+ end process;
+ process(clk)
+ begin
+ if clk'event and clk = '1' then
+ if enb = '1' then
+ dob <= RAM(conv_integer(addrb));
+ end if;
+ end if;
+ end process;
+end syn;
